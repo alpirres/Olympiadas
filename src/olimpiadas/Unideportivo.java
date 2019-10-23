@@ -9,14 +9,6 @@ package olimpiadas;
  *
  * @author alfon
  */
-public class Olimpiadas {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        Principal gui = new Principal();
-    }
+public class Unideportivo {
     
 }
