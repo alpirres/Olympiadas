@@ -98,13 +98,17 @@ public class Conexion {
 
     public void inicializar() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
             // Setup the connection with the DB         
             miConexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&user=" + this.login + "&password=" + this.password);
             String s = new String();
             StringBuffer sb = new StringBuffer();
+            } catch (Exception e) {
+            System.out.println("*** Error : " + e.toString());
+            e.printStackTrace();
+        }
 
-       
+       /*
             FileReader fr = new FileReader(new File("olympics.sql"));
             // be sure to not have line starting with "--" or "/*" or any other non aplhabetical character
 
@@ -121,11 +125,8 @@ public class Conexion {
             Statement st = miConexion.createStatement();
 
             for (int i = 0; i < inst.length; i++) {
-                // we ensure that there is no spaces before or after the request string
-                // in order to not execute empty statements
                 if (!inst[i].trim().equals("")) {
                     st.executeUpdate(inst[i]);
-                    
                 }
             }
             cerrarConexion();
@@ -133,7 +134,7 @@ public class Conexion {
             System.out.println("*** Error : " + e.toString());
             e.printStackTrace();
         }
-
+*/
     }
 
     /*Método: getConexion() 
