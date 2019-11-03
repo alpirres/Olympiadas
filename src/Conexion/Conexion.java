@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package basededatos;
+package Conexion;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,7 +30,7 @@ import org.xml.sax.SAXException;
 public class Conexion {
 
     //Atributo que gestiona la conexión con la BBDD 
-    private Connection miConexion;
+    Connection miConexion;
     private String host; //Host que contiene la BBDD private 
     String bbdd; //Nombre de la BBDD private 
     String login; //Login private 
@@ -103,12 +104,7 @@ public class Conexion {
             miConexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&user=" + this.login + "&password=" + this.password);
             String s = new String();
             StringBuffer sb = new StringBuffer();
-            } catch (Exception e) {
-            System.out.println("*** Error : " + e.toString());
-            e.printStackTrace();
-        }
-
-       /*
+            
             FileReader fr = new FileReader(new File("olympics.sql"));
             // be sure to not have line starting with "--" or "/*" or any other non aplhabetical character
 
@@ -125,8 +121,11 @@ public class Conexion {
             Statement st = miConexion.createStatement();
 
             for (int i = 0; i < inst.length; i++) {
+                // we ensure that there is no spaces before or after the request string
+                // in order to not execute empty statements
                 if (!inst[i].trim().equals("")) {
                     st.executeUpdate(inst[i]);
+                    
                 }
             }
             cerrarConexion();
@@ -134,7 +133,7 @@ public class Conexion {
             System.out.println("*** Error : " + e.toString());
             e.printStackTrace();
         }
-*/
+
     }
 
     /*Método: getConexion() 
@@ -163,11 +162,11 @@ public class Conexion {
     Devuelve: boolean 
     Funcionalidad: Devuelve true si ha cerrado la conexión a la BBDD y false en caso de que este cierre no se haya podido llevar a cabo
      */
-    public void cerrarConexion() throws Exception {
+    public void cerrarConexion()  {
         try {
             this.miConexion.close();
-        } catch (Exception e) {
-            throw e;
+        } catch (SQLException e) {
+            System.out.println("No se ha podido cerrar la conexión");
         }
     }
 

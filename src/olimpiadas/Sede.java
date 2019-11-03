@@ -5,6 +5,8 @@
  */
 package olimpiadas;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author alfon
@@ -13,10 +15,12 @@ public class Sede {
     private int id;
     private String nombre;
     private Float presupuesto;
+    public static ArrayList<Sede> sedes = new ArrayList<>();
     
     public Sede(String nombre, Float presupuesto) {
         this.nombre = nombre;
         this.presupuesto = presupuesto;
+        this.sedes.add(this);
     }
 
     public int getId() {

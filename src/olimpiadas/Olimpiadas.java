@@ -5,7 +5,7 @@
  */
 package olimpiadas;
 
-import basededatos.Conexion;
+import Conexion.Conexion;
 
 /**
  *
@@ -31,3 +31,5 @@ public class Olimpiadas {
     }
     
 }
+
+//nombre de todos los comisarios que son jueces en cualquier evento de una sede.
