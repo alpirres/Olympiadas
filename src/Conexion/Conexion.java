@@ -104,7 +104,7 @@ public class Conexion {
             miConexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&user=" + this.login + "&password=" + this.password);
             String s = new String();
             StringBuffer sb = new StringBuffer();
-            
+            /*
             FileReader fr = new FileReader(new File("olympics.sql"));
             // be sure to not have line starting with "--" or "/*" or any other non aplhabetical character
 
@@ -127,7 +127,7 @@ public class Conexion {
                     st.executeUpdate(inst[i]);
                     
                 }
-            }
+            }*/
             cerrarConexion();
         } catch (Exception e) {
             System.out.println("*** Error : " + e.toString());

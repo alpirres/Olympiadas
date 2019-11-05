@@ -5,17 +5,25 @@
  */
 package olimpiadas;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author alfon
  */
 public class Unideportivo {
+    
+    public static ArrayList<Unideportivo> unideps = new ArrayList<>();
     private int id;
     private String deporte;
-    private String intro;
-
-    public Unideportivo(String deporte) {
+    private String info;
+    
+    
+    public Unideportivo(int id,String deporte, String info) {
+        this.id=id;
         this.deporte = deporte;
+        this.info=info;
+        this.unideps.add(this);
     }
 
     public int getId() {
@@ -34,11 +42,11 @@ public class Unideportivo {
         this.deporte = deporte;
     }
 
-    public String getIntro() {
-        return intro;
+    public String getInfo() {
+        return info;
     }
 
-    public void setIntro(String intro) {
-        this.intro = intro;
+    public void setInfo(String info) {
+        this.info = info;
     }
 }

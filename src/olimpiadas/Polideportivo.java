@@ -5,24 +5,30 @@
  */
 package olimpiadas;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author alfon
  */
 public class Polideportivo {
-    private int id;
+    
+    private int id_complejo;
     private String info;
+    public static ArrayList<Polideportivo> polis = new ArrayList<>();
 
-    public Polideportivo(String info) {
+    public Polideportivo(int id,String info) {
+        this.id_complejo=id;
         this.info = info;
+        this.polis.add(this);
     }
 
     public int getId() {
-        return id;
+        return id_complejo;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.id_complejo = id;
     }
 
     public String getInfo() {

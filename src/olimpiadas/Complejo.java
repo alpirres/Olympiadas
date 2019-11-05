@@ -5,21 +5,26 @@
  */
 package olimpiadas;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author alfon
  */
 public class Complejo {
     
+    public static ArrayList<Complejo> complejos= new ArrayList<>();
     private int id;
     private String localizacon;
     private String jefe;
-    private String id_sede;
+    private int id_sede;
 
-    public Complejo(String localizacon, String jefe, String id_sede) {
+    public Complejo(int id, String localizacon, String jefe, int id_sede) {
+        this.id=id;
         this.localizacon = localizacon;
         this.jefe = jefe;
         this.id_sede = id_sede;
+        this.complejos.add(this);
     }
 
     public int getId() {
@@ -46,11 +51,11 @@ public class Complejo {
         this.jefe = jefe;
     }
 
-    public String getId_sede() {
+    public int getId_sede() {
         return id_sede;
     }
 
-    public void setId_sede(String id_sede) {
+    public void setId_sede(int id_sede) {
         this.id_sede = id_sede;
     }
     

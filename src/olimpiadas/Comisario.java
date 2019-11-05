@@ -5,19 +5,24 @@
  */
 package olimpiadas;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author alfon
  */
 public class Comisario {
     
+    public static ArrayList<Comisario> comisarios= new ArrayList<>();
     private int id;
     private String nombre;
     private String DNI;
 
-    public Comisario(String nombre, String DNI) {
+    public Comisario(int id,String nombre, String DNI) {
+        this.id=id;
         this.nombre = nombre;
         this.DNI = DNI;
+        this.comisarios.add(this);
     }
 
     public int getId() {

@@ -5,6 +5,8 @@
  */
 package olimpiadas;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author alfon
@@ -13,9 +15,12 @@ public class Material {
     
     private int id;
     private String nombre;
+    public static ArrayList<Material> materiales  = new ArrayList<>();
 
-    public Material(String nombre) {
+    public Material(int id, String nombre) {
+        this.id=id;
         this.nombre = nombre;
+        this.materiales.add(this);
     }
 
     public int getId() {

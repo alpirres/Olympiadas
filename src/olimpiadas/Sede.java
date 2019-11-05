@@ -17,7 +17,8 @@ public class Sede {
     private Float presupuesto;
     public static ArrayList<Sede> sedes = new ArrayList<>();
     
-    public Sede(String nombre, Float presupuesto) {
+    public Sede(int id, String nombre, Float presupuesto) {
+        this.id=id;
         this.nombre = nombre;
         this.presupuesto = presupuesto;
         this.sedes.add(this);

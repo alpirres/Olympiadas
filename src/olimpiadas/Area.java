@@ -5,6 +5,8 @@
  */
 package olimpiadas;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author alfon
@@ -15,11 +17,14 @@ public class Area {
     private String localizacion;
     private String Deporte;
     private int id_poli;
+    public static ArrayList<Area> areas  = new ArrayList<>();
 
-    public Area(String localizacion, String Deporte, int id_poli) {
+    public Area(int id, String localizacion, String Deporte, int id_poli) {
+        this.id=id;
         this.localizacion = localizacion;
         this.Deporte = Deporte;
         this.id_poli = id_poli;
+        this.areas.add(this);
     }
 
     public int getId() {

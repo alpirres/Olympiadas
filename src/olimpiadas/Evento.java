@@ -5,6 +5,7 @@
  */
 package olimpiadas;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -18,12 +19,15 @@ public class Evento {
     private Date fecha;
     private int id_complejo;
     private int id_area;
+    public static ArrayList<Evento> eventos = new ArrayList<>();
 
-    public Evento(String nombre, Date fecha, int id_complejo, int id_area) {
+    public Evento(int id, String nombre, Date fecha, int id_complejo, int id_area) {
+        this.id=id;
         this.nombre = nombre;
         this.fecha = fecha;
         this.id_complejo = id_complejo;
         this.id_area = id_area;
+        this.eventos.add(this);
     }
 
     public int getId() {

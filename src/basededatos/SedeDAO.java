@@ -9,8 +9,10 @@ import Conexion.Conexion;
 import olimpiadas.Olimpiadas;
 import olimpiadas.Sede;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,34 +22,48 @@ public class SedeDAO extends Conexion {
     
     
     
-    public boolean insertSede(Sede s){
-        boolean insert=false;
-        String lineaSQL;
+    public static void insertSede(String name, Float presupuesto){
+        int id = 0 ;
+        String insertSQL;
         //Objeto de tipo Statement
-        Statement sentencia;
-
+        
         //comando sql generico para la inserción
-        lineaSQL ="INSERT INTO headquarter (name, budget) values (?, ?)";
+        insertSQL ="INSERT INTO headquarter (name, budget) values (?, ?)";
         try {
             //conectamos el objeto preparedStmt a la base de datos
             Olimpiadas.miConexion.conectar();
-            PreparedStatement preparedStmt = Olimpiadas.miConexion.getConexion().prepareStatement(lineaSQL);
+            PreparedStatement preparedStmt = Olimpiadas.miConexion.getConexion().prepareStatement(insertSQL);
 
             //creamos un nuevo socio
-            preparedStmt.setString(1, s.getNombre());
-            preparedStmt.setFloat(2, s.getPresupuesto());
-            
+            preparedStmt.setString(1, name);
+            preparedStmt.setFloat(2, presupuesto);
             // la ejecutamos
-            preparedStmt.execute();
+            preparedStmt.executeUpdate();
+            //obtenemos el id
+            id=selectLastSede();
+            Sede s=new Sede(id,name,presupuesto);
             // habría que cerrar la conexion
             Olimpiadas.miConexion.cerrarConexion();
 
         } catch (SQLException se) {
             se.printStackTrace();
         }
-        
-        return insert;
+        System.out.println(id);
     }
     
-    //pulic boolean selectSede
+    public static int selectLastSede(){
+        int id = 0;
+        String selectSQL ="SELECT * FROM headquarter ORDER BY id DESC LIMIT 1";
+        try {
+            Olimpiadas.miConexion.conectar();
+            PreparedStatement preparedStmt=Olimpiadas.miConexion.getConexion().prepareStatement(selectSQL);
+            ResultSet rs = preparedStmt.executeQuery();
+            id=rs.getInt("id"); 
+            Olimpiadas.miConexion.cerrarConexion();
+        } catch (SQLException ex) {
+            Logger.getLogger(SedeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(id);
+        return id;
+    }
 }
