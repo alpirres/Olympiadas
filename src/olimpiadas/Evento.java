@@ -5,8 +5,10 @@
  */
 package olimpiadas;
 
+
+import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Date;
+
 
 /**
  *
@@ -16,12 +18,12 @@ public class Evento {
     
     private int id;
     private String nombre;
-    private Date fecha;
+    private Time fecha;
     private int id_complejo;
     private int id_area;
     public static ArrayList<Evento> eventos = new ArrayList<>();
 
-    public Evento(int id, String nombre, Date fecha, int id_complejo, int id_area) {
+    public Evento(int id, String nombre, Time fecha, int id_complejo, int id_area) {
         this.id=id;
         this.nombre = nombre;
         this.fecha = fecha;
@@ -46,11 +48,11 @@ public class Evento {
         this.nombre = nombre;
     }
 
-    public Date getFecha() {
+    public Time getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(Time fecha) {
         this.fecha = fecha;
     }
 

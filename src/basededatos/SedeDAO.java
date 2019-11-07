@@ -11,6 +11,7 @@ import olimpiadas.Sede;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,8 +23,7 @@ public class SedeDAO extends Conexion {
     
     
     
-    public static void insertSede(String name, Float presupuesto){
-        int id = 0 ;
+    public static void insert(String name, Float presupuesto){
         String insertSQL;
         //Objeto de tipo Statement
         
@@ -40,30 +40,29 @@ public class SedeDAO extends Conexion {
             // la ejecutamos
             preparedStmt.executeUpdate();
             //obtenemos el id
-            id=selectLastSede();
-            Sede s=new Sede(id,name,presupuesto);
+
             // habría que cerrar la conexion
             Olimpiadas.miConexion.cerrarConexion();
 
         } catch (SQLException se) {
             se.printStackTrace();
         }
-        System.out.println(id);
     }
     
-    public static int selectLastSede(){
-        int id = 0;
-        String selectSQL ="SELECT * FROM headquarter ORDER BY id DESC LIMIT 1";
+    public static ArrayList<Sede> SelectAll (){
+        ArrayList<Sede> datos = new ArrayList<>();
+        String select="SELECT * FROM headquarter";
         try {
             Olimpiadas.miConexion.conectar();
-            PreparedStatement preparedStmt=Olimpiadas.miConexion.getConexion().prepareStatement(selectSQL);
+            PreparedStatement preparedStmt = Olimpiadas.miConexion.getConexion().prepareStatement(select);
             ResultSet rs = preparedStmt.executeQuery();
-            id=rs.getInt("id"); 
-            Olimpiadas.miConexion.cerrarConexion();
+            while(rs.next()){
+                Sede s=new Sede(rs.getInt("id"),rs.getString("name"),rs.getFloat("budget"));
+                datos.add(s);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(SedeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(id);
-        return id;
+        return datos;
     }
 }

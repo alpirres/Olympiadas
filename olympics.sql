@@ -142,7 +142,7 @@ ALTER TABLE `comissioner_event`
   ADD CONSTRAINT `comisario` FOREIGN KEY (`id_comissioner`) REFERENCES `commissioner` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `evento` FOREIGN KEY (`id_event`) REFERENCES `event` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE `equipment_event`
-  ADD CONSTRAINT `enero` FOREIGN KEY (`id_event`) REFERENCES `event` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `evento` FOREIGN KEY (`id_event`) REFERENCES `event` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `equipamiento` FOREIGN KEY (`id_equipment`) REFERENCES `equipment` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE `event`
   ADD CONSTRAINT `id_sportcomplex` FOREIGN KEY (`id_sportcomplex`) REFERENCES `sportcomplex` (`id`);

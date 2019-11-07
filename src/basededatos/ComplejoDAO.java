@@ -6,10 +6,16 @@
 package basededatos;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import olimpiadas.Olimpiadas;
 import olimpiadas.Complejo;
+import olimpiadas.Sede;
 
 /**
  *
@@ -17,11 +23,8 @@ import olimpiadas.Complejo;
  */
 public class ComplejoDAO {
     
-    public static void insertComplejo(String locl, String jefe, int id_sede){
+    public static void insert(String locl, String jefe, int id_sede){
         String lineaSQL;
-        //Objeto de tipo Statement
-        Statement sentencia;
-
         //comando sql generico para la inserción
         lineaSQL ="INSERT INTO sportcomplex (location, boss, id_headquarter) values (?, ?, ?)";
         try {
@@ -42,5 +45,23 @@ public class ComplejoDAO {
         } catch (SQLException se) {
             se.printStackTrace();
         }
+    }
+    
+
+    public static ArrayList<Complejo> SelectAll() {
+        ArrayList<Complejo> datos = new ArrayList<>();
+        String select="SELECT * FROM sportcomplex";
+        try {
+            Olimpiadas.miConexion.conectar();
+            PreparedStatement preparedStmt = Olimpiadas.miConexion.getConexion().prepareStatement(select);
+            ResultSet rs = preparedStmt.executeQuery();
+            while(rs.next()){
+                Complejo c=new Complejo(rs.getInt("id"),rs.getString("location"),rs.getString("boss"), rs.getInt("id_headquarter"));
+                datos.add(c);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SedeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return datos;
     }
 }

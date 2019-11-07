@@ -8,26 +8,24 @@ package basededatos;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import olimpiadas.Olimpiadas;
-import olimpiadas.Sede;
-import olimpiadas.Unideportivo;
+import olimpiadas.Polideportivo;
 
 /**
  *
  * @author alfon
  */
-public class UnideportivoDAO {
+public class PolideportivoDAO {
     
-    public static void insert(int id, String deporte, String info){
+    public static void insert(int id, String info){
         String insertSQL;
         //Objeto de tipo Statement
         
         //comando sql generico para la inserción
-        insertSQL ="INSERT INTO sportcenter (id_sportcomplex,sport, informtion) values (?, ?, ?)";
+        insertSQL ="INSERT INTO multisportcenter (id_sportcomplex,informtion) values (?, ?)";
         try {
             //conectamos el objeto preparedStmt a la base de datos
             Olimpiadas.miConexion.conectar();
@@ -35,8 +33,7 @@ public class UnideportivoDAO {
 
             //creamos un nuevo socio
             preparedStmt.setInt(1, id);
-            preparedStmt.setString(2, deporte);
-            preparedStmt.setString(3, info);
+            preparedStmt.setString(2, info);
             // la ejecutamos
             preparedStmt.executeUpdate();
             //obtenemos el id
@@ -49,16 +46,16 @@ public class UnideportivoDAO {
         }
     }
     
-    public static ArrayList<Unideportivo> SelectAll (){
-        ArrayList<Unideportivo> datos = new ArrayList<>();
-        String select="SELECT * FROM sportcenter";
+    public static ArrayList<Polideportivo> SelectAll (){
+        ArrayList<Polideportivo> datos = new ArrayList<>();
+        String select="SELECT * FROM multisportcenter";
         try {
             Olimpiadas.miConexion.conectar();
             PreparedStatement preparedStmt = Olimpiadas.miConexion.getConexion().prepareStatement(select);
             ResultSet rs = preparedStmt.executeQuery();
             while(rs.next()){
-                Unideportivo ud=new Unideportivo(rs.getInt("id_sportcomplex"),rs.getString("sport"),rs.getString("information"));
-                datos.add(ud);
+                Polideportivo pd=new Polideportivo(rs.getInt("id_sportcomplex"),rs.getString("information"));
+                datos.add(pd);
             }
         } catch (SQLException ex) {
             Logger.getLogger(SedeDAO.class.getName()).log(Level.SEVERE, null, ex);
